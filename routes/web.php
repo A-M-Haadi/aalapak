@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController; 
 use App\Http\Controllers\Admin\SellerVerificationController;
+use App\Http\Controllers\Seller\StoreController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,6 +35,25 @@ Route::middleware(['auth', 'admin'])->group(function () {
             ]);
         Route::get('/products', [ProductManagementController::class, 'index'])->name('products.index');
         Route::delete('/products/{product}', [ProductManagementController::class, 'destroy'])->name('products.destroy');
+    });
+
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/seller/pending', function () {
+        return view('seller.pending'); 
+    })->name('seller.pending');
+});
+
+Route::middleware(['auth', 'seller'])->group(function () {
+
+    Route::prefix('seller')->name('seller.')->group(function () {
+        Route::get('/dashboard', [StoreController::class, 'dashboard'])->name('dashboard');
+
+        Route::get('/store/create', [StoreController::class, 'create'])->name('store.create');
+        Route::post('/store', [StoreController::class, 'store'])->name('store.store');
+        Route::get('/store/edit', [StoreController::class, 'edit'])->name('store.edit');
+        Route::patch('/store', [StoreController::class, 'update'])->name('store.update');
     });
 
 });
