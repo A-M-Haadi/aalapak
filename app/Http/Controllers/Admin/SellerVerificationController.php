@@ -20,6 +20,24 @@ class SellerVerificationController extends Controller
 
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'action' => 'required|in:approve,reject',
+        ]);
 
+        $message = '';
+
+        if ($request->action == 'approve') {
+            $user->store_status = 'approved';
+            $message = 'Seller berhasil disetujui (Approved).';
+        } 
+        elseif ($request->action == 'reject') {
+            $user->store_status = 'rejected';
+            $message = 'Seller berhasil ditolak (Rejected).';
+        }
+
+        $user->save();
+
+        return redirect()->route('admin.sellers.index')
+                         ->with('success', $message);
     }
 }
