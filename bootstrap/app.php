@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\IsAdmin::class,
             'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
             'guest' => \Illuminate\Auth\Middleware\RedirectIfAuthenticated::class,
+            'seller' => \App\Http\Middleware\IsSeller::class,
 
         ]);
     })
