@@ -52,12 +52,39 @@ class StoreController extends Controller
 
     public function edit()
     {
-        
+        $store = Auth::user()->store;
+
+        if (!$store) {
+            return redirect()->route('seller.store.create')
+                             ->with('error', 'Anda harus membuat toko terlebih dahulu.');
+        }
+
+        return view('seller.store.edit', compact('store'));
     }
 
     public function update(Request $request)
     {
+        $store = Auth::user()->store;
 
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($store->image) {
+                Storage::disk('public')->delete($store->image);
+            }
+
+            $path = $request->file('image')->store('store_images', 'public');
+            $validatedData['image'] = $path;
+        }
+
+        $store->update($validatedData);
+
+        return redirect()->route('seller.dashboard')
+                         ->with('success', 'Informasi toko berhasil diperbarui!');
     }
 
 }
