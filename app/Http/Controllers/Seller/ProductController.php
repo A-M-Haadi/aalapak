@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -28,8 +29,29 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-    {
-        //
+    { 
+        $validatedData = $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|integer|min:0',
+            'stock' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $storeId = Auth::user()->store->id;
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('product_images', 'public');
+            $validatedData['image'] = $path;
+        }
+
+        $validatedData['store_id'] = $storeId;
+
+        Product::create($validatedData);
+
+        return redirect()->route('seller.products.index')
+                         ->with('success', 'Produk baru berhasil ditambahkan.');
     }
 
     /**
