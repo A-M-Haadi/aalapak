@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController; 
 use App\Http\Controllers\Admin\SellerVerificationController;
 use App\Http\Controllers\Seller\StoreController;
+use App\Http\Controllers\Seller\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,6 +55,7 @@ Route::middleware(['auth', 'seller'])->group(function () {
         Route::post('/store', [StoreController::class, 'store'])->name('store.store');
         Route::get('/store/edit', [StoreController::class, 'edit'])->name('store.edit');
         Route::patch('/store', [StoreController::class, 'update'])->name('store.update');
+        Route::resource('products', ProductController::class);
     });
 
 });
