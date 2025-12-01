@@ -40,6 +40,9 @@
                                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">Rp {{ number_format($product->price) }}</td>
                                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $product->stock }}</td>
                                     <td class="whitespace-nowrap px-4 py-2">
+                                        <a href="{{ route('seller.products.edit', $product->id) }}" class="inline-flex items-center px-3 py-1 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 ">
+                                            Edit
+                                        </a>
                                         </td>
                                 </tr>
                                 @empty
