@@ -77,9 +77,12 @@
                                     <span>Rp {{ number_format($subtotal) }}</span>
                                 </div>
                                 
-                                <a href="{{ route('checkout.index') }}" class="block w-full text-center px-6 py-3 bg-green-600 border border-transparent rounded-md font-semibold text-lg text-white uppercase tracking-widest hover:bg-green-500">
-                                    Lanjut ke Checkout
-                                </a>
+                                <form action="{{ route('checkout.store') }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin melanjutkan checkout?');">
+                                    @csrf
+                                    <button type="submit" class="block w-full text-center px-6 py-3 bg-green-600 border border-transparent rounded-md font-semibold text-lg text-white uppercase tracking-widest hover:bg-green-500">
+                                        Lanjut ke Checkout
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     @endif

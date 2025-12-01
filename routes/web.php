@@ -8,6 +8,7 @@ use App\Http\Controllers\Seller\StoreController;
 use App\Http\Controllers\Seller\ProductController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/product/{product}', [PublicController::class, 'show'])->name('product.show');
@@ -67,4 +68,6 @@ Route::middleware(['auth', 'buyer'])->group(function () {
     Route::post('/cart/add', [CartController::class, 'store'])->name('cart.store');
     Route::delete('/cart/remove/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::patch('/cart/update/{cartItem}', [CartController::class, 'update'])->name('cart.update');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 });
