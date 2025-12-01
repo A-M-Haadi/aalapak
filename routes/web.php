@@ -59,6 +59,9 @@ Route::middleware(['auth', 'seller'])->group(function () {
         Route::get('/store/edit', [StoreController::class, 'edit'])->name('store.edit');
         Route::patch('/store', [StoreController::class, 'update'])->name('store.update');
         Route::resource('products', ProductController::class);
+        Route::get('/orders', [OrderManagementController::class, 'index'])->name('orders.index');
+        Route::get('/orders/{order}', [OrderManagementController::class, 'show'])->name('orders.show');
+        Route::patch('/orders/{order}', [OrderManagementController::class, 'update'])->name('orders.update');
     });
 
 });
