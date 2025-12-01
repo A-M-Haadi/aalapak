@@ -102,11 +102,19 @@ class ProductController extends Controller
                          ->with('success', 'Produk berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
-        //
+        if ($product->store_id !== Auth::user()->store->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+        $product->delete();
+
+        return redirect()->route('seller.products.index')
+                         ->with('success', 'Produk berhasil dihapus.');
     }
 }

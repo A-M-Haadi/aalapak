@@ -43,7 +43,14 @@
                                         <a href="{{ route('seller.products.edit', $product->id) }}" class="inline-flex items-center px-3 py-1 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 ">
                                             Edit
                                         </a>
-                                        </td>
+
+                                        <form action="{{ route('seller.products.destroy', $product->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
+                                            @csrf @method('DELETE') <button type="submit" class="inline-flex items-center px-3 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 ml-2">
+                                            Delete
+                                            </button>
+                                        </form>
+                                        
+                                    </td>
                                 </tr>
                                 @empty
                                 <tr>
