@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SellerVerificationController;
 use App\Http\Controllers\Seller\StoreController;
 use App\Http\Controllers\Seller\ProductController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/product/{product}', [PublicController::class, 'show'])->name('product.show');
@@ -58,4 +59,10 @@ Route::middleware(['auth', 'seller'])->group(function () {
         Route::resource('products', ProductController::class);
     });
 
+});
+
+Route::middleware(['auth', 'buyer'])->group(function () {
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'store'])->name('cart.store');
 });
