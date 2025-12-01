@@ -10,6 +10,7 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Buyer\OrderController;
+use App\Http\Controllers\Buyer\ReviewController;
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/product/{product}', [PublicController::class, 'show'])->name('product.show');
@@ -76,4 +77,6 @@ Route::middleware(['auth', 'buyer'])->group(function () {
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('/orders/{order}/product/{product}/review', [ReviewController::class, 'create'])->name('reviews.create');
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 });
