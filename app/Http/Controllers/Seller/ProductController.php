@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,16 +15,13 @@ class ProductController extends Controller
     public function index()
     {
         $storeId = Auth::user()->store->id;
-
         $products = Product::where('store_id', $storeId)->get();
-
         return view('seller.products.index', compact('products'));
     }
 
     public function create()
     {
         $categories = Category::all();
-
         return view('seller.products.create', compact('categories'));
     }
 

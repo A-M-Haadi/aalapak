@@ -32,34 +32,34 @@
                                 </tr>
                             </thead>
 
-                            <tbody class="divide-y divide-gray-200">
-                                @forelse ($products as $product)
-                                <tr>
-                                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $product->name }}</td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $product->category->name }}</td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">Rp {{ number_format($product->price) }}</td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $product->stock }}</td>
-                                    <td class="whitespace-nowrap px-4 py-2">
-                                        <a href="{{ route('seller.products.edit', $product->id) }}" class="inline-flex items-center px-3 py-1 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 ">
-                                            Edit
-                                        </a>
+                    <tbody class="divide-y divide-gray-200">
+                        @forelse ($products as $product)
+                        <tr>
+                            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $product->name }}</td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $product->category->name }}</td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700">Rp {{ number_format($product->price) }}</td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $product->stock }}</td>
+                            
+                            <td class="whitespace-nowrap px-4 py-2">
+                                <a href="{{ route('seller.products.edit', $product->id) }}" class="inline-flex items-center px-3 py-1 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 ">
+                                    Edit
+                                </a>
 
-                                        <form action="{{ route('seller.products.destroy', $product->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
-                                            @csrf @method('DELETE') <button type="submit" class="inline-flex items-center px-3 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 ml-2">
-                                            Delete
-                                            </button>
-                                        </form>
-                                        
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="5" class="whitespace-nowrap px-4 py-2 text-center text-gray-500">
-                                        Anda belum memiliki produk.
-                                    </td>
-                                </tr>
-                                @endforelse
-                            </tbody>
+                                <form action="{{ route('seller.products.destroy', $product->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
+                                    @csrf @method('DELETE') <button type="submit" class="inline-flex items-center px-3 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 ml-2">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="whitespace-nowrap px-4 py-2 text-center text-gray-500">
+                                Anda belum memiliki produk.
+                            </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
                         </table>
                     </div>
 

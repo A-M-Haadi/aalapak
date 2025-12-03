@@ -11,7 +11,9 @@
                 <div class="p-6 text-gray-900">
                     
                     <form method="POST" action="{{ route('admin.categories.store') }}">
-                        @csrf <div>
+                        @csrf
+
+                        <div>
                             <label for="name" class="block font-medium text-sm text-gray-700">Nama Kategori</label>
                             <input id="name" class="block mt-1 w-full rounded-md shadow-sm border-gray-300" type="text" name="name" :value="old('name')" required autofocus />
                         </div>

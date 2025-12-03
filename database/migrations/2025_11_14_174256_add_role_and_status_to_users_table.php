@@ -26,6 +26,8 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+// ... (use statements)
+
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
