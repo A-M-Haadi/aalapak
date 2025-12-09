@@ -15,8 +15,6 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <p class="mb-4 text-gray-500">Halaman ini mengizinkan Admin untuk menghapus produk yang melanggar ketentuan .</p>
-                    
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
                             <thead class="text-left">

@@ -17,14 +17,17 @@
         <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200 shadow-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-16">
-                    <a href="/" class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        Aalapak
+                    <a href="/" class="flex items-center gap-2 animate-scale-in">
+                        <div class="w-10 h-10 bg-aalapak-orange rounded-lg flex items-center justify-center text-white shadow-lg shadow-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                        </div>
+                        <span class="text-2xl font-extrabold text-aalapak-blue tracking-tight">Aalapak</span>
                     </a>
                     
                     @if (Route::has('login'))
                         <div class="flex items-center space-x-4">
                             @auth
-                                <a href="{{ url('/dashboard') }}" class="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:shadow-lg transform hover:-translate-y-0.5 transition-all">
+                                <a href="{{ url('/dashboard') }}" class="px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-medium hover:shadow-lg transform hover:-translate-y-0.5 transition-all">
                                     Dashboard
                                 </a>
                             @else
@@ -122,7 +125,7 @@
                             <!-- Price -->
                             <div class="mb-6">
                                 <p class="text-sm text-gray-500 mb-2">Harga</p>
-                                <p class="text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                <p class="text-5xl font-extrabold bg-gradient-to-r from-yellow-500 to-purple-600 bg-clip-text text-transparent">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </p>
                             </div>
@@ -131,12 +134,12 @@
                             <div class="mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-2">
-                                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                                         </svg>
-                                        <span class="text-gray-700 font-medium">Stok tersedia</span>
+                                        <span class="text-yellow-500 font-medium">Stok tersedia</span>
                                     </div>
-                                    <span class="text-2xl font-bold text-blue-600">{{ $product->stock }}</span>
+                                    <span class="text-2xl font-bold text-yellow-500">{{ $product->stock }}</span>
                                 </div>
                             </div>
                             
@@ -166,8 +169,7 @@
                                         <button type="submit" class="px-5 py-4 rounded-xl border-2 transition-all
                                             @if($isFavorited) 
                                                 bg-red-500 hover:bg-red-600
-                                            @else 
-                                                bg-white text-gray-700 border-gray-300 hover:border-red-500 hover:text-red-500
+                                            @else text-gray-700 border-gray-300 hover:border-red-500 hover:text-red-500
                                             @endif">
                                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>

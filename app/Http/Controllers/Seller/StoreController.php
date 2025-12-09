@@ -5,37 +5,37 @@ namespace App\Http\Controllers\Seller;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use App\Models\OrderItem;
-use App\Models\Product;
 
 class StoreController extends Controller
 {
-
     public function dashboard()
     {
         $user = Auth::user();
         $store = $user->store;
 
         if (!$store) {
-            return redirect()->route('seller.store.create');
+            return view('seller.dashboard', ['store' => null]);
         }
 
         $totalProducts = $store->products()->count();
 
-        $totalOrders = OrderItem::where('store_id', $store->id)->count();
+        $pendingOrders = OrderItem::where('store_id', $store->id)
+            ->whereHas('order', function($query) {
+                $query->whereIn('status', ['pending', 'paid']); 
+            })
+            ->distinct('order_id')
+            ->count('order_id');
 
         $totalRevenue = OrderItem::where('store_id', $store->id)
             ->whereHas('order', function($query) {
                 $query->where('status', 'Selesai');
             })
-            ->get()
-            ->sum(function($item) {
-                return $item->price * $item->quantity;
-            });
+            ->sum(DB::raw('price * quantity'));
 
-        return view('seller.dashboard', compact('store', 'totalProducts', 'totalOrders', 'totalRevenue'));
+        return view('seller.dashboard', compact('store', 'totalProducts', 'pendingOrders', 'totalRevenue'));
     }
 
     public function create()
@@ -43,7 +43,6 @@ class StoreController extends Controller
         if (Auth::user()->store) {
             return redirect()->route('seller.store.edit');
         }
-
         return view('seller.store.create');
     }
 
@@ -96,7 +95,6 @@ class StoreController extends Controller
             if ($store->image) {
                 Storage::disk('public')->delete($store->image);
             }
-
             $path = $request->file('image')->store('store_images', 'public');
             $validatedData['image'] = $path;
         }

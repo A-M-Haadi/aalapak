@@ -33,18 +33,31 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $validatedData = $request->validate([
+        // 1. Validasi Dasar (Nama & Email)
+        $rules = [
             'name' => 'required|string|max:255',
             'email' => [
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore($user->id),
+                \Illuminate\Validation\Rule::unique('users')->ignore($user->id),
             ],
-            'role' => 'required|in:admin,seller,buyer',
-        ]);
+        ];
 
-        $user->update($validatedData);
+        if ($user->role == 'seller') {
+            $rules['store_status'] = 'required|in:pending,approved,rejected';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+
+        if ($user->role == 'seller') {
+            $user->store_status = $validatedData['store_status'];
+        }
+
+        $user->save();
 
         return redirect()->route('admin.users.index')
                          ->with('success', 'Data user berhasil diperbarui.');
