@@ -61,7 +61,7 @@
                         </div>
                     </a>
                     <h1 class="mt-6 text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        MarketPlace
+                        Aalapak
                     </h1>
                     <p class="mt-2 text-gray-600">Platform jual beli terpercaya</p>
                 </div>
@@ -71,20 +71,6 @@
                     <div class="p-8">
                         {{ $slot }}
                     </div>
-                </div>
-
-                <!-- Footer Links -->
-                <div class="mt-8 text-center text-sm text-gray-600 animate-fade-in-up" style="animation-delay: 0.4s;">
-                    <div class="flex justify-center space-x-4">
-                        <a href="#" class="hover:text-blue-600 transition-colors">Tentang Kami</a>
-                        <span class="text-gray-400">•</span>
-                        <a href="#" class="hover:text-blue-600 transition-colors">Bantuan</a>
-                        <span class="text-gray-400">•</span>
-                        <a href="#" class="hover:text-blue-600 transition-colors">Kebijakan Privasi</a>
-                    </div>
-                    <p class="mt-4 text-gray-500">
-                        &copy; {{ date('Y') }} MarketPlace. All rights reserved.
-                    </p>
                 </div>
             </div>
 

@@ -12,21 +12,13 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                // heading: ['"Archivo Black"', 'sans-serif']
             },
             colors: {
-                primary: {
-                    50: '#eff6ff',
-                    100: '#dbeafe',
-                    200: '#bfdbfe',
-                    300: '#93c5fd',
-                    400: '#60a5fa',
-                    500: '#3b82f6',
-                    600: '#2563eb',
-                    700: '#1d4ed8',
-                    800: '#1e40af',
-                    900: '#1e3a8a',
-                },
+                'aalapak-orange': '#F28E2B',
+                'aalapak-blue': '#4E9FCA',
+                'aalapak-sky': '#76C6E6',
             },
             animation: {
                 'fade-in': 'fadeIn 0.5s ease-in-out',

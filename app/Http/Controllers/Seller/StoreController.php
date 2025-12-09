@@ -7,15 +7,35 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Models\OrderItem;
+use App\Models\Product;
 
 class StoreController extends Controller
 {
 
     public function dashboard()
     {
-        $store = Auth::user()->store;
+        $user = Auth::user();
+        $store = $user->store;
 
-        return view('seller.dashboard', compact('store'));
+        if (!$store) {
+            return redirect()->route('seller.store.create');
+        }
+
+        $totalProducts = $store->products()->count();
+
+        $totalOrders = OrderItem::where('store_id', $store->id)->count();
+
+        $totalRevenue = OrderItem::where('store_id', $store->id)
+            ->whereHas('order', function($query) {
+                $query->where('status', 'Selesai');
+            })
+            ->get()
+            ->sum(function($item) {
+                return $item->price * $item->quantity;
+            });
+
+        return view('seller.dashboard', compact('store', 'totalProducts', 'totalOrders', 'totalRevenue'));
     }
 
     public function create()
@@ -86,5 +106,4 @@ class StoreController extends Controller
         return redirect()->route('seller.dashboard')
                          ->with('success', 'Informasi toko berhasil diperbarui!');
     }
-
 }

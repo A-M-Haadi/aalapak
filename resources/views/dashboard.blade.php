@@ -113,7 +113,7 @@
                                     @csrf
                                     <button type="submit" class="p-2.5 rounded-full backdrop-blur-sm transition-all shadow-lg
                                         @if(in_array($product->id, $favoriteProductIds)) 
-                                            bg-red-500 text-white scale-110
+                                            bg-red-500 scale-110
                                         @else 
                                             bg-white/90 text-gray-700 hover:bg-red-500 hover:text-white hover:scale-110
                                         @endif">

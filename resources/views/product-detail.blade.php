@@ -18,7 +18,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-16">
                     <a href="/" class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        MarketPlace
+                        Aalapak
                     </a>
                     
                     @if (Route::has('login'))
@@ -165,7 +165,7 @@
                                         @csrf
                                         <button type="submit" class="px-5 py-4 rounded-xl border-2 transition-all
                                             @if($isFavorited) 
-                                                bg-red-500 text-white border-red-500 hover:bg-red-600
+                                                bg-red-500 hover:bg-red-600
                                             @else 
                                                 bg-white text-gray-700 border-gray-300 hover:border-red-500 hover:text-red-500
                                             @endif">
@@ -266,12 +266,12 @@
             </div>
         </main>
 
-        <!-- Footer -->
-        <footer class="bg-gray-900 text-white mt-20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div class="text-center">
-                    <p class="text-gray-400">&copy; 2024 MarketPlace. All rights reserved.</p>
-                </div>
+        <!-- Footer Simple -->
+        <footer class="bg-white border-t border-gray-200 pt-12 pb-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="text-2xl font-extrabold text-aalapak-blue mb-4">Aalapak</p>
+                <p class="text-gray-500 text-sm mb-8">Platform e-commerce terpercaya untuk memenuhi segala kebutuhan Anda.</p>
+                <p class="text-gray-400 text-xs">&copy; {{ date('Y') }} Aalapak. All rights reserved.</p>
             </div>
         </footer>
     </body>
