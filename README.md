@@ -1,59 +1,158 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛍️ Aalapak - E-Commerce Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Aalapak** adalah platform E-Commerce multi-peran yang dirancang untuk menghubungkan penjual (*Seller*) dan pembeli (*Buyer*) dalam satu ekosistem yang terintegrasi.
 
-## About Laravel
+Aplikasi ini dibangun menggunakan framework **Laravel 11** dengan fokus pada keamanan, kemudahan penggunaan, dan fitur yang lengkap; mulai dari manajemen toko, manajemen stok, hingga ulasan produk.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📌 Deskripsi Proyek
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Proyek ini bertujuan untuk menyediakan solusi e-commerce yang mendukung 4 peran pengguna utama: **Admin**, **Seller**, **Buyer**, dan **Public User (Guest)**. Sistem ini memungkinkan transaksi jual beli yang terstruktur dengan validasi admin untuk setiap penjual baru demi keamanan platform.
 
-## Learning Laravel
+> **Proyek ini dibuat untuk memenuhi Tugas Final Praktikum Pemrograman Web 2025.**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Fitur Utama
 
-## Laravel Sponsors
+### 1. 👨‍💼 Admin (Administrator)
+* **Manajemen Kategori:** Membuat, mengedit, dan menghapus kategori produk (*CRUD*).
+* **Verifikasi Seller:** Memvalidasi pendaftaran Seller baru (*Approve/Reject*).
+* **Manajemen Pengguna:** Memantau daftar pengguna dan menghapus akun yang melanggar aturan.
+* **Moderasi Produk:** Menghapus produk dari Seller manapun jika tidak sesuai ketentuan.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. 🏪 Seller (Penjual)
+* **Pendaftaran & Verifikasi:** Mendaftar dan menunggu persetujuan Admin sebelum bisa berjualan.
+* **Manajemen Toko:** Mengelola profil toko (Nama, Deskripsi, Logo).
+* **Manajemen Produk:** Mengelola inventaris produk (*CRUD*), stok, harga, dan gambar.
+* **Manajemen Pesanan:** Memperbarui status pesanan (*Menunggu Pembayaran* -> *Diproses* -> *Selesai*).
+* **Dashboard Statistik:** Melihat ringkasan performa toko (Total Produk, Pesanan, Pendapatan).
 
-### Premium Partners
+### 3. 🛒 Buyer (Pembeli)
+* **Pencarian & Filter:** Mencari produk berdasarkan nama, kategori, dan harga.
+* **Keranjang Belanja:** Menambah produk, mengubah jumlah, dan menghapus item.
+* **Wishlist (Favorit):** Menyimpan produk yang disukai.
+* **Alamat Pengiriman:** Mengelola daftar alamat (*CRUD*) untuk checkout.
+* **Checkout:** Membuat pesanan dengan memilih alamat pengiriman.
+* **Riwayat Pesanan:** Melacak status pesanan dan detail pembelian.
+* **Rating & Review:** Memberikan ulasan dan bintang (1-5) pada produk yang telah dibeli.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 4. 🕵️ Public User (Guest)
+* **Katalog Produk:** Melihat daftar produk unggulan dan detailnya.
+* **Pencarian:** Menggunakan fitur pencarian dan filter.
+* **Autentikasi:** Diarahkan Login/Register untuk fitur transaksional.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🛠️ Teknologi yang Digunakan
 
-## Code of Conduct
+* **Framework:** [Laravel 11](https://laravel.com)
+* **Bahasa:** PHP 8.2+
+* **Frontend:** Blade Templates, Tailwind CSS, Alpine.js
+* **Database:** MySQL
+* **Authentication:** Laravel Breeze
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## ⚙️ Instalasi & Cara Menjalankan
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini di komputer lokal Anda:
 
-## License
+### 1. Clone Repository
+```bash
+git clone [https://github.com/username-anda/aalapak.git](https://github.com/username-anda/aalapak.git)
+cd aalapak
+````
+
+### 2\. Install Dependensi
+
+Pastikan Anda sudah menginstal PHP dan Node.js.
+
+```bash
+composer install
+npm install
+```
+
+### 3\. Konfigurasi Environment
+
+Duplikat file `.env.example` menjadi `.env`.
+
+```bash
+cp .env.example .env
+```
+
+Buka file `.env` dan sesuaikan konfigurasi database Anda:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nama_database_anda
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 4\. Generate Key & Migrasi
+
+Generate application key dan jalankan migrasi database beserta seeder (data dummy).
+
+```bash
+php artisan key:generate
+php artisan migrate:fresh --seed
+```
+
+### 5\. Setup Storage
+
+Agar gambar produk dan logo toko bisa diakses publik.
+
+```bash
+php artisan storage:link
+```
+
+### 6\. Jalankan Aplikasi
+
+Buka dua terminal terpisah untuk menjalankan backend dan frontend secara bersamaan.
+
+**Terminal 1 (Laravel Server):**
+
+```bash
+php artisan serve
+```
+
+**Terminal 2 (Vite Build/Dev):**
+
+```bash
+npm run dev
+```
+
+Akses aplikasi di browser melalui: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+-----
+
+## 🔑 Akun Demo (Default)
+
+Jika Anda menjalankan perintah `php artisan migrate:fresh --seed`, Anda dapat menggunakan akun Administrator berikut untuk masuk:
+Admin
+  * **Email:** `admin@gmail.com`
+  * **Password:** `admin123`
+
+> **Catatan:** Untuk peran **Seller** dan **Buyer**, silakan lakukan registrasi akun baru melalui aplikasi untuk mencoba alur pengguna dari awal.
+
+-----
+
+## 📸 Tangkapan Layar (Screenshots)
+
+
+## 👨‍💻 Author
+
+Dibuat oleh **A.M. Haadi Assa'di**
+
+  * **Tugas Final Praktikum Pemrograman Web 2025**
+  * Universitas Hasanuddin (Sistem Informasi)
+
+-----
+
+### License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
