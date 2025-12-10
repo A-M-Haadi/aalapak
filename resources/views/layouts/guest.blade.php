@@ -52,15 +52,17 @@
             <div class="relative z-10 w-full max-w-md px-6">
                 
                 <!-- Logo Section -->
-                <div class="text-center mb-8 animate-fade-in-up">
-                    <a href="/" class="inline-block">
-                        <div class="w-20 h-20 mx-auto bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-2xl transform hover:scale-110 hover:rotate-3 transition-all duration-300">
-                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                <div class="flex justify-center w-full mb-6">
+                    <a href="/" class="flex items-center gap-2 animate-scale-in">
+                        <div class="w-24 h-24 bg-aalapak-orange rounded-lg flex items-center justify-center text-white shadow-lg shadow-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg>
                         </div>
                     </a>
-                    <h1 class="mt-6 text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                </div>
+                <div class="text-center mb-8 animate-fade-in-up">
+                    <h1 class="text-2xl font-extrabold text-aalapak-blue tracking-tight">
                         Aalapak
                     </h1>
                     <p class="mt-2 text-gray-600">Platform jual beli terpercaya</p>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\Product;
+use App\Models\Product; // Pastikan model Product di-import
 use App\Models\CartItem;
 use App\Models\Address;
 use Illuminate\Http\Request;
@@ -26,6 +26,19 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', 'Keranjang Anda kosong.');
         }
 
+        // --- TAMBAHAN BARU: CEK STOK SEBELUM TAMPILKAN HALAMAN ---
+        // Ini mencegah user masuk ke checkout jika stok tidak valid
+        foreach ($cartItems as $item) {
+            // Ambil stok terbaru dari database (fresh)
+            $product = Product::find($item->product_id);
+
+            // Jika jumlah di keranjang lebih besar dari stok gudang
+            if ($item->quantity > $product->stock) {
+                return redirect()->route('cart.index')->with('error', 'Mohon maaf, stok produk "' . $product->name . '" tidak mencukupi (Sisa: ' . $product->stock . '). Silakan kurangi jumlah pesanan Anda di keranjang.');
+            }
+        }
+        // --- AKHIR TAMBAHAN ---
+
         $subtotal = 0;
         foreach ($cartItems as $item) {
             $subtotal += $item->product->price * $item->quantity;
@@ -42,7 +55,6 @@ class CheckoutController extends Controller
         $request->validate([
             'address_id' => [
                 'required',
-
                 Rule::exists('addresses', 'id')->where('user_id', $user->id)
             ]
         ], [
@@ -57,12 +69,16 @@ class CheckoutController extends Controller
             DB::beginTransaction();
 
             $totalPrice = 0;
+            
+            // Cek stok sekali lagi saat tombol bayar ditekan (untuk keamanan ganda)
             foreach ($cartItems as $item) {
-                $product = $item->product;
+                // Lock row product agar tidak dibeli orang lain bersamaan (Opsional tapi bagus)
+                $product = Product::where('id', $item->product_id)->lockForUpdate()->first(); 
+                
                 if ($product->stock < $item->quantity) {
                     DB::rollBack();
                     return redirect()->route('cart.index')
-                                     ->with('error', 'Stok untuk produk "' . $product->name . '" tidak mencukupi.');
+                                     ->with('error', 'Gagal memproses pesanan. Stok "' . $product->name . '" baru saja habis atau tidak mencukupi.');
                 }
                 $totalPrice += $product->price * $item->quantity;
             }
@@ -82,8 +98,12 @@ class CheckoutController extends Controller
                     'quantity' => $item->quantity,
                     'price' => $item->product->price,
                 ]);
+                
+                // Kurangi stok
                 $item->product->decrement('stock', $item->quantity);
             }
+            
+            // Kosongkan keranjang
             $user->cartItems()->delete();
 
             DB::commit();
@@ -94,7 +114,7 @@ class CheckoutController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('cart.index')
-                             ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+                             ->with('error', 'Terjadi kesalahan sistem: ' . $e->getMessage());
         }
     }
 }

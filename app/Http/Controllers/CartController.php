@@ -8,7 +8,6 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class CartController extends Controller
 {
     public function index()
@@ -25,33 +24,44 @@ class CartController extends Controller
         return view('cart.index', compact('cartItems', 'subtotal'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'product_id' => 'required|exists:products,id'
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'product_id' => 'required|exists:products,id',
+        'quantity'   => 'required|integer|min:1'
+    ]);
 
-        $productId = $request->product_id;
-        $userId = Auth::id();
+    $product = Product::find($request->product_id);
+    $userId = Auth::id();
 
-        $existingItem = CartItem::where('user_id', $userId)
-                                ->where('product_id', $productId)
-                                ->first();
+    // Cek item yang SUDAH ada di keranjang user
+    $existingItem = CartItem::where('user_id', $userId)
+                            ->where('product_id', $request->product_id)
+                            ->first();
 
-        if ($existingItem) {
-            $existingItem->quantity += 1;
-            $existingItem->save();
-        } 
-        else {
-            CartItem::create([
-                'user_id' => $userId,
-                'product_id' => $productId,
-                'quantity' => 1,
-            ]);
-        }
+    // Hitung total bayangan (jumlah di keranjang + jumlah yang mau ditambah)
+    $currentCartQty = $existingItem ? $existingItem->quantity : 0;
+    $newTotalQty = $currentCartQty + $request->quantity;
 
-        return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke keranjang!');
+    // VALIDASI KETAT: Jika total melebihi stok
+    if ($newTotalQty > $product->stock) {
+        return redirect()->back()->with('error', 'Stok tidak cukup! Anda sudah punya ' . $currentCartQty . ' di keranjang, sisa stok hanya ' . $product->stock . '.');
     }
+
+    // Jika lolos, baru simpan/update
+    if ($existingItem) {
+        $existingItem->quantity += $request->quantity;
+        $existingItem->save();
+    } else {
+        CartItem::create([
+            'user_id' => $userId,
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+        ]);
+    }
+
+    return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke keranjang!');
+}
 
     public function update(Request $request, CartItem $cartItem)
     {

@@ -13,11 +13,10 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-                // heading: ['"Archivo Black"', 'sans-serif']
             },
             colors: {
-                'aalapak-orange': '#F28E2B',
-                'aalapak-blue': '#4E9FCA',
+                'aalapak-orange': '#6d5dfc',
+                'aalapak-blue': '#6d5dfc',
                 'aalapak-sky': '#76C6E6',
             },
             animation: {
